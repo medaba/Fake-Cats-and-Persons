@@ -37,5 +37,5 @@ def get_persons(amount):
 
 
 if __name__ == '__main__':
-    get_cats(10)
-    # get_persons(10)
+    # get_cats(10)
+    get_persons(10)
