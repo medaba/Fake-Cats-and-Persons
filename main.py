@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Скрипт для получения фотографий несуществующих людей/котов.
-# Фотографии создаются на стороннем сервисе с помощью нейросети
+# Фотографии создаются на стороннем сервисе с помощью нейросети,
 # а мы их просто скачиваем по API.
 # Сервис генерирует по 1 фото в 3 сек., поэтому в ф-ях стоит пауза 3 сек.
 
@@ -24,13 +24,13 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    '-c', '--cats',
+    '-c', '--cat',
     action='store_true',
     help=('разрешить закачку нейрокотов.')
 )
 
 parser.add_argument(
-    '-p', '--people',
+    '-p', '--person',
     action='store_true',
     help=('разрешить закачку несуществующих людей.')
 )
@@ -46,7 +46,7 @@ async def get_cats(amount):
        """
     for i in range(amount):
         cat = get_cat()
-        cat.save_image(f"cats/{generate_filename()}")
+        cat.save_image(f"cats/{generate_filename()}.jpeg")
         await asyncio.sleep(3)
 
 
@@ -58,7 +58,7 @@ async def get_persons(amount):
        """
     for i in range(amount):
         person = get_person()
-        person.save_image(f"persons/{generate_filename()}")
+        person.save_image(f"persons/{generate_filename()}.jpeg")
         await asyncio.sleep(3)
 
 
@@ -72,12 +72,9 @@ async def main(amount, cats=False, persons=False):
     if not tasks:
         raise ValueError
 
-    # TODO: добавить в jupyter описание для asyncio.gather и asyncio.wait
-    # await asyncio.gather(get_cats(amount), get_persons(amount))
-    # await asyncio.wait([get_cats(amount), get_persons(amount)])
     await asyncio.wait(tasks)
 
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(main(args.amount, args.cats, args.people))
+    loop.run_until_complete(main(args.amount, args.cat, args.person))
