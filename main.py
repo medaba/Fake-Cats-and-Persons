@@ -20,19 +20,19 @@ parser.add_argument(
     type=int,
     required=True,
     metavar='',
-    help=('количество фотографий.')
+    help='количество фотографий.'
 )
 
 parser.add_argument(
     '-c', '--cat',
     action='store_true',
-    help=('разрешить закачку нейрокотов.')
+    help='разрешить закачку нейрокотов.'
 )
 
 parser.add_argument(
     '-p', '--person',
     action='store_true',
-    help=('разрешить закачку несуществующих людей.')
+    help='разрешить закачку несуществующих людей.'
 )
 
 args = parser.parse_args()
